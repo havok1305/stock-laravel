@@ -22,4 +22,15 @@ Route::get('/test', function () {
     return "<h2>This is a test</h2>";
 });
 
-Route::get('/products', 'ProductController@lista');
+Route::get('/products', 'ProductController@list');
+
+//Route::get('/products/show', 'ProductController@show');
+
+//using route parameter
+//Route::get('/products/show/{id}', 'ProductController@show');
+
+//using optional route parameter
+//Route::get('/products/show/{id?}', 'ProductController@show');
+
+//allowing only numbers in the show route
+Route::get('/products/show/{id}', 'ProductController@show')->where('id', '[0-9]+');
