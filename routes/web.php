@@ -34,3 +34,8 @@ Route::get('/products', 'ProductController@list');
 
 //allowing only numbers in the show route
 Route::get('/products/show/{id}', 'ProductController@show')->where('id', '[0-9]+');
+
+//Route::match(['get', 'post'], '/products/add', 'ProductController@add');
+Route::get('/products/addform', 'ProductController@addform');
+
+Route::post('/products/add', 'ProductController@add');

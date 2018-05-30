@@ -36,4 +36,22 @@ class ProductController extends Controller
         }
         return view('product.details', ['product'=>$product[0]]);
     }
+
+    public function addform()
+    {
+
+        return view('product.form');
+    }
+    public function add()
+    {
+        $inputs = Request::all();
+        $name = $inputs['name'];
+        $value = $inputs['value'];
+        $unit = $inputs['unit'];
+
+        $inserted = DB::insert('insert into products (`name`, `value`, unit) values (? , ?, ?)', [$name, $value, $unit]);
+
+//        return implode(',',[$name, $value, $unit]);
+        return view('product.added', ['inserted'=>$inserted])->with('name', $name);
+    }
 }

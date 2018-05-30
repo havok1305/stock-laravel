@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//needs to put /api before this route in order to use it
+Route::get('/test', function(Request $request) {
+   return  "Testing API";
+});
