@@ -9,16 +9,11 @@ class ProductController extends Controller
     public function lista()
     {
         $products = DB::select("SELECT * FROM products");
-        $html = "<h1>Listing some products</h1>";
-        $html .= "<ul>";
-        foreach($products as $product) {
-            $html .= "<li> Name: ".$product->name;
-            $html .= " Value: ".$product->value;
-            $html .= " Unit: ".$product->unit;
-            $html .= "</li>";
-        }
-        $html .= "</ul>";
-        return $html;
+
+        //another way would be using magic methods
+        //return view('listproducts')->withProducts($products);
+//        return view('listproducts')->with('products', $products);
+        return view('listproducts', ['products'=>$products]);
     }
 
 }
