@@ -159,3 +159,85 @@ Command: `php artisan app:name stock`
   
    return $response;
   ```
+  
+### Blades templates
+
+   Blade is the simple, yet powerful templating engine provided with Laravel. 
+   Blade view files use the `.blade.php` file extension and are typically stored in the `resources/views` directory.
+   
+   With blades, you can define parent views that children may inherit the common part and implement only the different code. This will provide more re-usability and less repetition when coding.
+   
+   At the _parent_ view, you should define the main code, and inside the block where the children should implement their code, you should add the `@yield('identification')`. For example:
+   
+   ```
+   <html>
+    <head></head>
+    <body>
+        
+        @yield('content')
+        
+    </body>
+   </html>
+   ```
+   
+   At the _child_ view, you should define which is the parent blade by using the directive `@extends('identification')` and then define the section that should be rendered. In the end of the section, you should use the directive `@endsection`:
+   
+   ```
+   @extends('main')
+   
+   @section('content')
+   
+   <h1>Some content from this child</h1>
+   
+   @endsection
+   ```
+   
+   **Looping** can be done inside blades without using the `<?php ?>` tags. Also, using `{{}}` can replace the `<?=?>` tags to access variables results:
+   
+   ```
+   <ul>
+   @foreach($list as $item)
+        <li>{{ $item->value }}</li>
+   @endforeach
+   </ul>
+   
+   <ul>
+   @for($i = 0; $i < count($list); $i++)
+        <li>{{ $list[$i]->value }}</li>
+   @endfor
+   </ul>
+   
+   <ul>
+      @while(true)
+           <li>{{ $list[$i]->value }}</li>
+      @endwhile
+  </ul>
+   ```
+   
+   There is also another type of looping that can be useful to show some information when the array is empty:
+   
+   ```
+   <ul>
+   @forelse ($list as $item)
+       <li>{{ $item->value }}</li>
+   @empty
+       <p>No items on this list</p>
+   @endforelse
+   </ul>
+   ```
+   
+   You can also define default values for empty variables inside the same brackets using `or` like this:
+   
+   `{{ $value or 'some default value' }}`
+   
+   Blades also allow conditional directives:
+   
+   ```
+   @if(false)
+       <p> Do something </p>
+   @elseif(false)
+       <p> Do this instead </p>
+   @else
+       <p> Or this </p>
+   @endif
+   ```
