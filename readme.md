@@ -79,4 +79,52 @@ Command: `php artisan app:name stock`
    * **Tests** -> Contains automated tests. Each class should be sufixed with the word `Test`. You can run the tests by executing `phpunit`.
    * **Vendor** -> Contains Composer dependencies. 
    
-    
+   ### Manipulating databases
+   
+   Laravel allows the creation of models usign artisan:
+   
+   `php artisan make:model Product -m`
+   
+   The models generate will be stored at `app/Providers`. By default, you should name the model using camel case singular nouns, while in the database it should be plural with all letters lowercase.
+   The `-m` parameter also creates a migration file.
+   
+   **Migrations** allows the creations of databases without actually using sql CREATE. The migration file 
+   To start a migration, use the command:
+   
+   `php artisan migrate`
+   
+   The generated migrations are located at `database/migrations` Before migrate, you should check the file, to manually map the columns just like in the database.
+   
+   By default, Laravel will map some data on the Model class without actually showing it on the code. Example: if you create a Product model, by default it will have the primary key as `id` and table name `products`.
+   You can also change that by declaring `protected` variables in the class with the names `$id` and `$table`.
+   
+   **Seeding** is another tool that helps to populate a database with test data.
+   The following command generates a seeder class inside the directory `database/seeds`:
+   
+   `php artisan make:seeder ProductsTableSeeder`
+   
+   Inside the created seeder class and inside the method `run()` you should add the code that inserts the data. For example:
+   
+   ```
+   DB::table('products')->insert([
+               'name' => str_random(25),
+               'value' => rand(0, 20),
+               'unit' => strtoupper(str_random(3))
+           ]);
+   ```
+   
+   And then, inside the method run at the class `DatabaseSeeder.php` (also at `database/seeds`), you should add the call to the method `run()` of the other seeder classes. For example:
+   
+   `$this->call(ProductsTableSeeder::class);`
+   
+   Now, you should execute the command that triggers the actual seeding:
+   
+   `php artisan db:seed`
+   
+   By default it will execute the `DatabaseSeeder` class, but you can use a specific seeder by using the parameter `--class`:
+   
+   `php artisan db:seed --class=ProductsTableSeeder`
+   
+   You can also rebuild the database by using the command:
+   
+   `php artisan migrate:refresh --seed`
