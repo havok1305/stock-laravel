@@ -79,7 +79,7 @@ Command: `php artisan app:name stock`
    * **Tests** -> Contains automated tests. Each class should be sufixed with the word `Test`. You can run the tests by executing `phpunit`.
    * **Vendor** -> Contains Composer dependencies. 
    
-   ### Manipulating databases
+### Manipulating databases
    
    Laravel allows the creation of models usign artisan:
    
@@ -128,3 +128,34 @@ Command: `php artisan app:name stock`
    You can also rebuild the database by using the command:
    
    `php artisan migrate:refresh --seed`
+   
+### Middlewares
+
+   Middleware provide a convenient mechanism for filtering HTTP requests entering your application.
+   To create a new middleware, use the `make:middleware` Artisan command:
+   
+   `php artisan make:middleware MiddlewareName`
+   
+   This command will place a new middleware class within your `app/Http/Middleware` directory.
+   Inside the class, there will be a method called `handle` which has to parameters: `$request` and `$next`.
+   The `$request` stores data from the request, so you can, for example, get some value and compares to something in order to evaluate if the request should proceed.
+   The `$next` should be used to pass the request deeper into the application, by calling the next middleware passing the request as parameter, like this:
+   
+   `$next($request)`
+   
+   You can perform tasks before the request is handled by the application:
+   
+   ```
+   //perform some action
+   
+   return $next($request); 
+   ```
+   Or after it is handled:
+   
+   ```
+   $response = $next($request);
+  
+   // Perform action
+  
+   return $response;
+  ```
