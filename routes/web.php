@@ -21,3 +21,5 @@ Route::get('/', function () {
 Route::get('/test', function () {
     return "<h2>This is a test</h2>";
 });
+
+Route::get('/products', 'ProductController@lista');
