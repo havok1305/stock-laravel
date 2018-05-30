@@ -39,3 +39,9 @@ Route::get('/products/show/{id}', 'ProductController@show')->where('id', '[0-9]+
 Route::get('/products/addform', 'ProductController@addform');
 
 Route::post('/products/add', 'ProductController@add');
+
+Route::post('/products/update/{id}', 'ProductController@update');
+
+Route::get('/products/delete/{id}', 'ProductController@delete');
+
+Route::get('/products/formmodel/{id}', 'ProductController@formmodel');

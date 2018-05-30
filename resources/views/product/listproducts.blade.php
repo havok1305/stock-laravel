@@ -32,6 +32,9 @@
                 <a href="{{ action('ProductController@show', ['id'=>$product->id]) }}">
                     <span class="glyphicon glyphicon-search"></span>Show
                 </a>
+                <a href="{{ action('ProductController@delete', ['id'=>$product->id]) }}">
+                    <span class="glyphicon glyphicon-trash"></span>Delete
+                </a>
             </td>
         </tr>
         @empty
