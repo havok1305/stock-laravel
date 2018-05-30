@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <form method="post" action="/products/add">
+    <form method="post" action="{{ action('ProductController@add') }}">
         @csrf
         <div class="form-group">
             <label for="name">Name</label>

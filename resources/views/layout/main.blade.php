@@ -16,8 +16,8 @@
                     </a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/products">List</a> </li>
-                    <li><a href="/products/addform">New</a> </li>
+                    <li><a href="{{ action('ProductController@list') }}">List</a> </li>
+                    <li><a href="{{ action('ProductController@addform') }}">New</a> </li>
                 </ul>
             </div>
         </nav>

@@ -21,3 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/test', function(Request $request) {
    return  "Testing API";
 });
+
+Route::get('/products', 'ProductController@listJson');

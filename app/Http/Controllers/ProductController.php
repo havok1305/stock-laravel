@@ -16,6 +16,13 @@ class ProductController extends Controller
         return view('product.listproducts', ['products'=>$products]);
     }
 
+    public function listJson()
+    {
+        $products = DB::select("SELECT * FROM products");
+
+        return $products;
+    }
+
     /*public function show()
     {
 //        $id = Request::input('id', 0);
@@ -52,6 +59,8 @@ class ProductController extends Controller
         $inserted = DB::insert('insert into products (`name`, `value`, unit) values (? , ?, ?)', [$name, $value, $unit]);
 
 //        return implode(',',[$name, $value, $unit]);
-        return view('product.added', ['inserted'=>$inserted])->with('name', $name);
+//        return view('product.added', ['inserted'=>$inserted])->with('name', $name);
+//        return redirect('/products')->withInput(['inserted'=>$inserted, 'name'=>$name]);
+        return redirect()->action('ProductController@list')->withInput(['inserted'=>$inserted, 'name'=>$name]);
     }
 }
