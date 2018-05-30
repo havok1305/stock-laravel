@@ -13,7 +13,7 @@ class ProductController extends Controller
         //another way would be using magic methods
         //return view('listproducts')->withProducts($products);
 //        return view('listproducts')->with('products', $products);
-        return view('listproducts', ['products'=>$products]);
+        return view('product.listproducts', ['products'=>$products]);
     }
 
     /*public function show()
@@ -34,6 +34,6 @@ class ProductController extends Controller
         if(empty($product)) {
             return "Product doesn't exists!";
         }
-        return view('details', ['product'=>$product[0]]);
+        return view('product.details', ['product'=>$product[0]]);
     }
 }

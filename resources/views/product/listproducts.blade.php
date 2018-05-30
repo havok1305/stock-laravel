@@ -1,6 +1,6 @@
 <?php
 ?>
-@extends('main')
+@extends('layout.main')
 
 @section('content')
 <h1>Listing the products</h1>
