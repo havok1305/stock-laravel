@@ -9,6 +9,13 @@ use Stock\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+//        $this->middleware('myauth');
+        //protect only some endpoints with authentication
+        $this->middleware('myauth', ['only'=>['addform', 'delete']]);
+    }
+
     public function list()
     {
         $products = Product::all();
