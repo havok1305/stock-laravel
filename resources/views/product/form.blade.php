@@ -1,6 +1,16 @@
 @extends('layout.main')
 
 @section('content')
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     @if($product->exists)
         <form method="post" action="{{ action('ProductController@update', ['id'=>$product->id]) }}">
             <input type="hidden" value="{{ $product->id }}">

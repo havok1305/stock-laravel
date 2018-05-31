@@ -5,6 +5,7 @@ namespace Stock\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Stock\Product;
+use Stock\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -53,7 +54,7 @@ class ProductController extends Controller
         $product = new Product();
         return view('product.form', ['product'=>$product]);
     }
-    public function add()
+    public function add(ProductRequest $request)
     {
 
         /*$inputs = Request::all();
@@ -73,8 +74,12 @@ class ProductController extends Controller
 //        $product = new Product($inputs);
 //        $inserted = $product->save();
 
+        //validating without a custom request class
+//        Request::validate([
+//            'name'=>'required|unique'
+//        ]);
 
-        $product = Product::create(Request::all());
+        $product = Product::create($request->validated());
 
         $inserted = !empty($product->id);
 //        return implode(',',[$name, $value, $unit]);
@@ -92,12 +97,12 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        return redirect()
-            ->action('ProductController@list');
+        return redirect()->action('ProductController@list');
     }
 
-    public function update($id)
+    public function update(ProductRequest $request)
     {
+        $id = $request->route('id');
         $product = Product::find($id);
         $product->name = Request::input('name');
         $product->value = Request::input('value');
